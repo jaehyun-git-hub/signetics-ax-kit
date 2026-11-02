@@ -1,0 +1,19 @@
+{
+  "name": "signetics-ax",
+  "owner": {
+    "name": "jaehyun-git-hub"
+  },
+  "metadata": {
+    "description": "시그네틱스 심화과정 실무 스킬 마켓플레이스. 모두의 코워크(modu-ai/moai-cowork)를 바탕으로 만든 수정본이며 modu-ai와 제휴하거나 보증받은 배포본이 아닙니다.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "signetics-ax-kit",
+      "source": "./plugins/signetics-ax-kit",
+      "version": "1.0.0",
+      "description": "주간 품질보고·숫자 검수·사실/추정 점검·문서 작성·회의록·내 업무 스킬 만들기",
+      "category": "제조 품질·보고"
+    }
+  ]
+}

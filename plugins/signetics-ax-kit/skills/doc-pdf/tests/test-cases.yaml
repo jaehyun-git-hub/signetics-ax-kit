@@ -1,0 +1,46 @@
+skill: doc-pdf
+version: 1.1.2
+kind: manual_acceptance_cases
+note: 실제 자동 실행기는 포함되지 않는다. 각 사례는 사용 가능한 PDF 출력 경로에서 별도로 실행하고 결과 파일을 눈으로 확인한다.
+test_cases:
+  - id: TC-001
+    name: markdown-korean-table
+    input: |
+      # 업무 보고서
+      ## 수치 요약
+      | 항목 | 목표 | 실적 |
+      |---|---:|---:|
+      | 완료 건수 | 3 | 2 |
+    verify:
+      - PDF 파일이 실제로 열리는가
+      - 제목과 표 값이 입력과 일치하는가
+      - 한글 글리프와 표 경계가 인쇄 화면에서 보이는가
+  - id: TC-002
+    name: structured-json
+    input: |
+      {"title":"제안서","sections":[{"heading":"범위","body":"검토 대상"}]}
+    verify:
+      - JSON 값이 제목·본문으로 옮겨졌는가
+      - 자동 JSON 변환기가 없으면 그 한계를 보고했는가
+  - id: TC-003
+    name: mixed-script
+    input: "API 연동 가이드 / 인증 토큰 / REST API / ①②③"
+    verify:
+      - 한글·라틴 문자·기호가 모두 화면에 표시되는가
+      - PDF 텍스트 추출과 화면 표시를 각각 확인했는가
+  - id: TC-004
+    name: plain-text
+    input: |
+      팀 회의록
+
+      일시: 2024년 5월 15일
+      안건: 일정 협의
+    verify:
+      - 빈 줄과 단락 분리가 유지되는가
+      - 원본에 없는 결론이나 참석자가 추가되지 않았는가
+  - id: TC-005
+    name: multilingual
+    input: "한국어 / 日本語 / 简体中文 / English / 新幹線"
+    verify:
+      - 각 언어 글리프를 화면에서 확인했는가
+      - 사용한 글꼴과 대체 글꼴을 확인했는가
