@@ -31,12 +31,12 @@ metadata:
 const kit = require("${CLAUDE_SKILL_DIR}/scripts/deck_kit.js");   // 경로를 못 쓰면 스킬 폴더의 scripts/deck_kit.js를 작업 폴더로 복사해 require
 const d = kit.create({ title: "10월 품질 리뷰", org: "품질팀", note: "교육용 가상 데이터" });
 d.cover({ kicker: "월간 품질 리뷰", title: "10월 품질 리뷰", subtitle: "40~44주 수율, 불량 유형, 조치 현황", meta: "2026-11-02 · 품질팀" });
-d.kpis({ kicker: "요약", title: "10월 수율 99.15%로 목표를 넘었다", cards: [{ label: "10월 수율", value: "99.15%", sub: "목표 99.0% 달성", tone: "good" }], note: "한 줄 해석", src: "원본 파일 이름" });
+d.kpis({ kicker: "요약", title: "10월 수율 99.16%로 목표를 넘었다", cards: [{ label: "10월 수율", value: "99.16%", sub: "목표 99.0% 달성", tone: "good" }], note: "한 줄 해석", src: "원본 파일 이름" });
 d.chart({ kicker: "주차별 추이", title: "결론 문장", type: "line", categories: ["40주", "41주"], series: [{ name: "A라인", values: [99.2, 99.3] }], target: 99.0, targetLabel: "목표 99.0%", unit: "%", min: 98.8, max: 99.4, side: { title: "읽는 법", bullets: ["요점 1", "요점 2"] }, src: "원본 파일 이름" });
 d.table({ kicker: "라인별 요약", title: "결론 문장", columns: ["라인", "수율"], rows: [["A", "99.21%"]], highlightRows: [], align: ["center", "right"], src: "원본 파일 이름" });
 d.twoCol({ kicker: "비교", title: "결론 문장", left: { heading: "사실", bullets: ["..."], tone: "good" }, right: { heading: "추정", bullets: ["..."], tone: "warn" } });
 d.actions({ kicker: "조치 현황", title: "결론 문장", items: [{ text: "조치 내용", owner: "담당 부서", due: "11/06", status: "진행 중" }] });
-d.onePager({ kicker: "본부장 보고", title: "결론 문장", cards: [{ label: "10월 수율", value: "99.15%", sub: "목표 달성", tone: "good" }], columns: [{ heading: "상황", bullets: ["..."] }, { heading: "의미", bullets: ["..."], tone: "warn" }, { heading: "다음 조치", bullets: ["..."], tone: "good" }], src: "원본 파일 이름" });   // 한 장 보고
+d.onePager({ kicker: "본부장 보고", title: "결론 문장", cards: [{ label: "10월 수율", value: "99.16%", sub: "목표 달성", tone: "good" }], columns: [{ heading: "상황", bullets: ["..."] }, { heading: "의미", bullets: ["..."], tone: "warn" }, { heading: "다음 조치", bullets: ["..."], tone: "good" }], src: "원본 파일 이름" });   // 한 장 보고
 d.section({ number: "02", title: "구간 제목" });
 d.closing({ title: "다음 달 계획", points: ["...", "..."], ask: "요청: ..." });
 await d.save("결과.pptx");
