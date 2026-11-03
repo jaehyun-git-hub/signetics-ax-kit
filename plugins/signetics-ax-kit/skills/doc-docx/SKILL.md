@@ -29,6 +29,29 @@ metadata:
 
 워드, docx, Word 문서, 계약서, 공문서, 보고서 생성, 문서 편집, 기안문, 제안서, 공문, 협조문, 기획서
 
+## 기본 디자인 — doc_kit.py (사용자 양식이나 브랜드가 없을 때)
+
+제출 양식(docx)을 받았으면 그 양식을 채운다. 양식이 없으면 디자인을 새로 정하지 말고 `scripts/doc_kit.py`를 쓴다. 남색 제목 상자, 문서 정보 칸, 번호 붙은 절 제목, 줄무늬 표, 안내 상자, [사실]·[추정] 표시 줄, 서명란이 정해져 있다.
+
+```python
+import sys; sys.path.insert(0, "${CLAUDE_SKILL_DIR}/scripts")   # 경로를 못 쓰면 scripts/doc_kit.py를 작업 폴더로 복사
+from doc_kit import Report
+r = Report(title="8D 보고서 (1차 회신)", subtitle="SG261013C02 · 기능 불량 · 고객사 K",
+           meta=[("문서 번호", "8D-CQ-2610-07"), ("작성일", "2026-11-03"), ("상태", "초안")])
+r.callout("[추정]은 아직 확인하지 않은 내용입니다.", tone="warn", title="확인 필요")   # tone: info | good | warn | bad
+r.h1("문제 정의", number="D2")
+r.kv([("고객사", "고객사 K"), ("대상 로트", "SG261013C02")])
+r.fact("출하 전 테스트 수율 96.9%", source="테스트결과_week42_전체.csv")
+r.estimate("범프 접합 불량", check="불량 시료 단면 분석", owner="(담당자 입력)")
+r.table(["항목", "내용", "목표일"], [["D5", "영구 대책 선정", "(담당자 입력)"]], widths=[2, 8, 3], highlight=[])
+r.bullets(["항목 1", "항목 2"]); r.para("본문"); r.h2("소제목"); r.signoff(); r.page_break()
+r.save("결과.docx")
+```
+
+- 문서 첫 화면에 결론(무엇이 문제이고 무엇을 요청하는지)이 보이게 callout이나 요약 표를 먼저 둔다.
+- 근거가 있는 문장은 `fact(source=...)`, 확인 전인 내용은 `estimate(check=..., owner=...)`로 쓴다. 담당자·일정은 지어내지 않고 "(담당자 입력)"으로 둔다.
+- 저장 후 PDF로 렌더해 표 폭, 줄바꿈, 쪽 나눔을 확인한다.
+
 ## 디자인 시스템 — 사용자 브랜드 우선
 
 사용자가 제공한 브랜드 지침과 제출처 양식이 우선입니다. 없으면 읽기 쉬운 중립 서식을 고릅니다. Claude 톤을 요청한 경우에만 `references/modern-design-system.md`의 예시 색·타이포·간격을 참고합니다.
